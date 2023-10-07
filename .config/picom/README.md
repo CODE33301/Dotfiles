@@ -24,3 +24,12 @@ exec picom -b &
 WM_CLASS(STRING) = "st-256color", "st-256color"
 ...
 ```
+### Wallpaper
+#### Install feh
+```
+sudo pacman -Syu feh
+```
+#### Set Wallpaper
+```
+exec feh --bg-scale /home/$USER/.config/Wallpapers/JPG/_DSC6639.jpg
+```
