@@ -12,6 +12,10 @@ mkdir .config/picom
 ```
 picom &
 ```
+### Run Picom
+```
+exec picom -b &
+```
 ### Find a window’s class name.
 * Run xprop from the command line and click on the target window.
 * Search the xprop output for the WM_CLASS(STRING) property, which will show the window class name.
