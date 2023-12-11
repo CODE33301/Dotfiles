@@ -81,6 +81,8 @@ beautiful.init(theme_path)
 -- Border Width For All Layers
 beautiful.useless_gap = 3
 -- This is used later as the default terminal and editor to run.
+-- "xterm", mate-terminal", "st"
+-- Simple Terminal will have a top border with awesome
 terminal = "mate-terminal"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
