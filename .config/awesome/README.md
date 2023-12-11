@@ -3,6 +3,10 @@
 ## Configuration
 ### The default rc.lua file.
 A copy of this file is usually installed in /etc/xdg/awesome/rc.lua
+### Replace default rc.lua file to current rc.lua file
+```
+cp /etc/xdg/awesome/rc.lua .config/awesome
+```
 
 ## Arc Icon Theme
 For the [icons](https://github.com/horst3180/arc-icon-theme), then follow the installation instructions.
