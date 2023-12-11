@@ -7,6 +7,10 @@ A copy of this file is usually installed in /etc/xdg/awesome/rc.lua
 ```
 cp /etc/xdg/awesome/rc.lua .config/awesome
 ```
+### Restart AwesomeWM
+```
+Mod4 + Control + r
+```
 ## Keystrokes
 
 ## Arc Icon Theme
