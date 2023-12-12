@@ -231,9 +231,18 @@ mode "resize" {
 
 bindsym $mod+Shift+r mode "resize"
 
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
+#############################################################################################################
+#############################################################################################################
+###                                                                                                       ###
+### Start i3bar to display a workspace bar (plus the system information i3status finds out, if available) ###
+###                                                                                                       ###
+#############################################################################################################
+#############################################################################################################
 bar {
+        #### i3bar Top ###
+        position top
+        #### i3bar Top ###
+        # position Bottom
         status_command i3status
 }
 
