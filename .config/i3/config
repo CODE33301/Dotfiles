@@ -121,19 +121,32 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+Shift+w layout tabbed
-bindsym $mod+e layout toggle split
+###############################################################################################
+###############################################################################################
+###                                                                                         ###
+###                 Change Container Layout (stacked, tabbed, toggle split)                 ###
+###                                                                                         ###
+###############################################################################################
+###############################################################################################
+bindsym $mod+ctrl+1 layout stacking
+bindsym $mod+ctrl+2 layout tabbed
+bindsym $mod+ctrl+3 layout toggle split
+###############################################################################################
+###############################################################################################
+###                                                                                         ###
+###                 Change Split Layout (vertical, horizontal, toggle)                 ###
+###                                                                                         ###
+###############################################################################################
+###############################################################################################
+# Split in vertical orientation
+bindsym $mod+ctrl+4 split v
+# Split in horizontal orientation
+bindsym $mod+ctrl+5 split h
+bindsym $mod+ctrl+6 split toggle
+###############################################################################################
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
