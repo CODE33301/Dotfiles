@@ -8,6 +8,12 @@
 | Reload The Configuration File | $mod+Shift+c |
 | Exit i3 | $mod+Shift+q |
 | Restart i3 Inplace | $mod+r |
+| Split In Vertical Orientation | $mod+ctrl+4 |
+| Split In Horizontal Orientation | $mod+ctrl+5 |
+| Layout Stacking | $mod+ctrl+1 |
+| Layout Tabbed | $mod+ctrl+2 |
+| Layout Toggle Split | $mod+ctrl+3 |
+| ... | ... |
 
 ## Packages
 ### dmenu
