@@ -11,7 +11,16 @@ cp /etc/xdg/awesome/rc.lua .config/awesome
 ```
 Mod4 + Control + r
 ```
-## Keystrokes
+### Remove Title Bar
+Change true to false
+```
+properties = { titlebars_enabled = false
+```
+
+## Keybinding
+| Title  | Keybinding |
+| ------------- | ------------- |
+| ... | ... |
 
 ## Arc Icon Theme
 For the [icons](https://github.com/horst3180/arc-icon-theme), then follow the installation instructions.
