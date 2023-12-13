@@ -70,9 +70,9 @@ awful.layout.layouts = {
 ```
 sudo pacman -Syu picom-git
 ```
-### Start Manually
+### Start Custom Configuration File
 ```
-picom --config /dev/null
+picom --config /home/$USER/.config/picom/picom.conf
 ```
 ### By default it reads config ~/.config/picom.conf
 ### Kill Picom
