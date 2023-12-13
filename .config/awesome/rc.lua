@@ -75,11 +75,17 @@ end
 ----------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------------
--- beautiful.init(gears.filesystem.get_configuration_dir() .. "/themes/default/theme.lua")
-local theme_path = string.format("%s/.config/awesome/themes/%s/theme.lua", os.getenv("HOME"), "default")
-beautiful.init(theme_path)
--- Border Width For All Layers
-beautiful.useless_gap = 3
+-- Themes define colours, icons, font and wallpapers.
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.useless_gap = 5
+beautiful.gap_single_client = true
+-- Client Border Width
+beautiful.border_width = 3
+-- Client Is Not Focused
+beautiful.border_normal = "#000000"
+-- Client Is Focused
+beautiful.border_focus = "#FFFFFF"
+
 -- This is used later as the default terminal and editor to run.
 -- "xterm", mate-terminal", "st"
 -- Simple Terminal will have a top border with awesome
