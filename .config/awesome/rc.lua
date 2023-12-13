@@ -454,3 +454,5 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+
+awful.spawn.with_shell("feh --bg-scale /home/$USER/.config/Wallpapers/JPG/_DSC6639.jpg")
