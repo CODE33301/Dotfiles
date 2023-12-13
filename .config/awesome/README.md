@@ -1,6 +1,15 @@
 # MyAwesomeConfig
 
 ## Configuration
+### Remove Tasklist Widget - Comment it to remove it
+```
+-- Create a tasklist widget
+s.mytasklist = awful.widget.tasklist {
+    screen  = s,
+    filter  = awful.widget.tasklist.filter.currenttags,
+    buttons = tasklist_buttons
+}
+```
 ### The default rc.lua file.
 A copy of this file is usually installed in /etc/xdg/awesome/rc.lua
 ### Replace default rc.lua file to current rc.lua file
