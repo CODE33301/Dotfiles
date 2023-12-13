@@ -24,7 +24,20 @@ sudo pacman -Syu dmenu
 ```
 sudo pacman -Syu rofi
 ```
-
+### Picom
+```
+sudo pacman -Syu picom-git
+```
+## Picom
+### Start Manually
+```
+picom --config /dev/null
+```
+### By default it reads config ~/.config/picom.conf
+### Kill Picom
+```
+pkill picom
+```
 ## ERRORs
 ### Error: status_command not found or is missing a library dependency
 ```
