@@ -68,7 +68,8 @@ awful.layout.layouts = {
 ## Picom
 ### Install
 ```
-sudo pacman -Syu picom-git
+sudo pacman -Syu picom
+sudo yay -S picom-git
 ```
 ### Start Custom Configuration File
 ```
