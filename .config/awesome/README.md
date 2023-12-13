@@ -1,6 +1,34 @@
 # MyAwesomeConfig
 
 ## Configuration
+### Right Widget Battery
+#### Install acpi
+```
+sudo apt install acpi
+sudo pacman -S acpi
+```
+#### Add to rc.lua file - AwesomeWM 3.5 ^
+```
+batterywidget = wibox.widget.textbox()    
+batterywidget:set_text(" | Battery | ")    
+batterywidgettimer = timer({ timeout = 5 })    
+batterywidgettimer:connect_signal("timeout",    
+  function()    
+    fh = assert(io.popen("acpi | cut -d, -f 2,3 -", "r"))    
+    batterywidget:set_text(" |" .. fh:read("*l") .. " | ")    
+    fh:close()    
+  end    
+)    
+batterywidgettimer:start()
+```
+#### Add "batterywidget"
+```
+{ -- Right widgets
+    ...
+    batterywidget,
+    ...
+},
+```
 ### Remove Tasklist Widget - Comment it to remove it
 ```
 -- Create a tasklist widget
