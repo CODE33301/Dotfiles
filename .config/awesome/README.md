@@ -1,6 +1,16 @@
 # MyAwesomeConfig
 
 ## Configuration
+### awful.wibar
+#### Change Bar Location
+```
+s.mywibox = awful.wibar({position="top"})
+s.mywibox = awful.wibar({position="bottom"})
+```
+#### Change Bar Height
+```
+s.mywibox = awful.wibar({height=25})
+```
 ### Right Widget Battery
 #### Install acpi
 ```
