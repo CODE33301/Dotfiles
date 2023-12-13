@@ -29,6 +29,8 @@ batterywidgettimer:start()
     ...
 },
 ```
+##### Output
+Battery 1: discharging, 44%, 00:18:48 remaining
 ### Remove Tasklist Widget - Comment it to remove it
 ```
 -- Create a tasklist widget
