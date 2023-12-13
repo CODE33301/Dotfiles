@@ -65,7 +65,20 @@ awful.layout.layouts = {
 }
 -- }}}
 ```
-
+## Picom
+### Install
+```
+sudo pacman -Syu picom-git
+```
+### Start Manually
+```
+picom --config /dev/null
+```
+### By default it reads config ~/.config/picom.conf
+### Kill Picom
+```
+pkill picom
+```
 ## Keybinding
 | Title  | Keybinding |
 | ------------- | ------------- |
