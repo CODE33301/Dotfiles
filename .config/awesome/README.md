@@ -75,6 +75,15 @@ awful.layout.layouts = {
 }
 -- }}}
 ```
+### Network Manager Applet
+#### Install Network Manager Applet Package
+```
+sudo pacman -S network-manager-applet
+```
+#### Autostart From The Confi File When At Boot
+```
+awful.spawn.with_shell("nm-applet")
+```
 ## Picom
 ### Install
 ```
