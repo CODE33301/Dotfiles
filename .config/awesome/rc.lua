@@ -457,10 +457,6 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
---local handle = os.execute('feh --bg-scale /home/$USER/.config/Wallpapers/JPG/_DSC6639.jpg')
---local result = handle:read("*a")
---handle:close()
-
---os.execute('feh --bg-scale /home/$USER/.config/Wallpapers/JPG/_DSC6639.jpg')
-
-awful.spawn.with_shell("feh --bg-scale /home/$USER/.config/Wallpapers/JPG/_DSC6639.jpg")
+awful.spawn.with_shell("feh --bg-scale --randomize /home/$USER/.config/Wallpapers/JPG/*")
+awful.spawn.with_shell("picom --config /home/$USER/.config/picom/picom.conf")
+awful.spawn.with_shell("nm-applet")
