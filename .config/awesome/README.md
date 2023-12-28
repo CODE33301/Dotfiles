@@ -89,7 +89,7 @@ awful.spawn.with_shell("nm-applet")
 ```
 sudo pacman -Syu blueman
 ```
-### Enable Bluetooth
+#### Enable Bluetooth
 ```
 sudo systemctl enable bluetooth
 ```
