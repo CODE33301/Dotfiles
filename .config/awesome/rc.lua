@@ -460,3 +460,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 awful.spawn.with_shell("feh --bg-scale --randomize /home/$USER/.config/Wallpapers/JPG/*")
 awful.spawn.with_shell("picom --config /home/$USER/.config/picom/picom.conf")
 awful.spawn.with_shell("nm-applet")
+awful.spawn.with_shell("blueman-applet")
