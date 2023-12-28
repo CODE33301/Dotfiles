@@ -84,6 +84,15 @@ sudo pacman -S network-manager-applet
 ```
 awful.spawn.with_shell("nm-applet")
 ```
+### Blueman
+#### Install Blueman
+```
+sudo pacman -Syu blueman
+```
+### Enable Bluetooth
+```
+sudo systemctl enable bluetooth
+```
 ## Picom
 ### Install
 ```
