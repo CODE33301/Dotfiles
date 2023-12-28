@@ -7,6 +7,6 @@
   ########################################################
 
 # Purple Colors Main:#A020F0
-colors_array=("#1F0330" "#3D075F" "#5C0A8F" "#7B0DBF" "#9911EE" "#AE40F2" "#C270F5" "#D6A0F8" "#EBCFFC" "#FFFFFF")
+colors_array=("#0C134F" "#1D267D" "#5C469C" "#a653f9")
 # Change Background Color Terminal
 echo -ne "\033]11;"${colors_array[RANDOM%"${#colors_array[@]}"]}"\007"
