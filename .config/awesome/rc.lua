@@ -83,9 +83,9 @@ beautiful.border_normal = "#000000"
 beautiful.border_focus = "#FFFFFF"
 
 -- This is used later as the default terminal and editor to run.
--- "xterm", mate-terminal", "st"
+-- "xterm", mate-terminal", "st", "terminology"
 -- Simple Terminal will have a top border with awesome
-terminal = "st"
+terminal = "terminology"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
