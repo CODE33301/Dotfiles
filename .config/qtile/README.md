@@ -9,11 +9,6 @@ sudo pacman -Syu Rofi
 ```
 sudo pacman -Syu qtile
 ```
-### dmenu2
-I use dmenu for more features and better configuation.
-```
-yay -S dmenu2
-```
 ### Python Xlib library
 For randr and display.
 ```
