@@ -1,5 +1,9 @@
 # MyAwesomeConfig
-
+## Installation
+### Rofi
+```
+sudo pacman -Syu Rofi
+```
 ## Configuration
 ### awful.wibar
 #### Change Bar Location
