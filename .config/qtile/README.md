@@ -1,6 +1,10 @@
 # MyQTileWMConfig
 This is my QTile Config files. You are very welcome to copy &amp; paste, download &amp; edit, and use this as an example to help you improve your qtile config.
 ## Installation
+### Rofi
+```
+sudo pacman -Syu Rofi
+```
 ### qtile
 ```
 sudo pacman -Syu qtile
