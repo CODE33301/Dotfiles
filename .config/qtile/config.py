@@ -39,7 +39,7 @@ for output in res['outputs']:
 ###############################################################################################
 ###############################################################################################
 mod = "mod4"
-terminal = "mate-terminal"
+terminal = "terminology"
 browser = "firefox"
 fileManager = "nautilus"
 torBrowser = r".tor-browser_en-US/Browser/start-tor-browser"
