@@ -5,32 +5,10 @@
 ###                                                                                         ###
 ###############################################################################################
 ###############################################################################################
+from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
-from libqtile.utils import guess_terminal
-from libqtile import bar, layout, widget
 from libqtile.lazy import lazy
-
-from colors import selectedTheme
-import subprocess
-import random
-import os
-
-from Xlib import X, display
-from Xlib.ext import randr
-from pprint import pprint
-
-d = display.Display()
-s = d.screen()
-r = s.root
-res = r.xrandr_get_screen_resources()._data
-# Dynamic multiscreen!
-num_screens = 0
-for output in res['outputs']:
-    print("Output %d:" % (output))
-    mon = d.xrandr_get_output_info(output, res['config_timestamp'])._data
-    print("%s: %d" % (mon['name'], mon['num_preferred']))
-    if mon['num_preferred']:
-        num_screens += 1
+from libqtile.utils import guess_terminal
 ###############################################################################################
 ###############################################################################################
 ###                                                                                         ###
@@ -40,10 +18,6 @@ for output in res['outputs']:
 ###############################################################################################
 mod = "mod4"
 terminal = "terminology"
-browser = "firefox"
-fileManager = "nautilus"
-torBrowser = r".tor-browser_en-US/Browser/start-tor-browser"
-currentKernel = os.listdir('/lib/modules')[0]
 ###############################################################################################
 ###############################################################################################
 ###                                                                                         ###
@@ -54,39 +28,66 @@ currentKernel = os.listdir('/lib/modules')[0]
 ###############################################################################################
 ###############################################################################################
 keys = [
-    # Switch Focus between windows - Will Not Work With Stack
-    Key([mod], "Left", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "Right", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "Down", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "Up", lazy.layout.up(), desc="Move focus up"),
+    # A list of available commands that can be bound to keys can be found
+    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
+    # Switch between windows
+    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
+    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
+    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
-    # Move windows between left/right columns or move up/down in current stack. Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "Left", lazy.layout.shuffle_left(), desc="Move window to the left"),
-    Key([mod, "shift"], "Right", lazy.layout.shuffle_right(), desc="Move window to the right"),
-    Key([mod, "shift"], "Down", lazy.layout.shuffle_down(), desc="Move window down"),
-    Key([mod, "shift"], "Up", lazy.layout.shuffle_up(), desc="Move window up"),
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(), desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink. Columns
-    Key([mod, "control"], "Left", lazy.layout.grow_left(), desc="Grow window to the left"),
-    Key([mod, "control"], "Right", lazy.layout.grow_right(), desc="Grow window to the right"),
-    Key([mod, "control"], "Down", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "Up", lazy.layout.grow_up(), desc="Grow window up"),
+    # will be to screen edge - window would shrink.
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
+    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
-    Key([mod], "Return", lazy.spawn("st"), desc="Launch terminal"),
+    Key(
+        [mod, "shift"],
+        "Return",
+        lazy.layout.toggle_split(),
+        desc="Toggle between split and unsplit sides of stack",
+    ),
+    Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
+    Key(
+        [mod],
+        "f",
+        lazy.window.toggle_fullscreen(),
+        desc="Toggle fullscreen on the focused window",
+    ),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "p", lazy.spawn("dmenu_run -h 30"), desc="Run dmenu_run"),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "p", lazy.spawn("rofi -show run"), desc="Run dmenu_run"),
 ]
+
+# Add key bindings to switch VTs in Wayland.
+# We can't check qtile.core.name in default config as it is loaded before qtile is started
+# We therefore defer the check until the key binding is run by using .when(func=...)
+for vt in range(1, 8):
+    keys.append(
+        Key(
+            ["control", "mod1"],
+            f"f{vt}",
+            lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
+            desc=f"Switch to VT{vt}",
+        )
+    )
 ###############################################################################################
 ###############################################################################################
 ###                                                                                         ###
@@ -94,11 +95,31 @@ keys = [
 ###                                                                                         ###
 ###############################################################################################
 ###############################################################################################
-groups = [
-    Group("web", matches=[Match(title=["Firefox"])]),
-    Group("Terminal"),
-    Group("web", matches=[Match(title=["Firefox"])]),
-   ]
+groups = [Group(i) for i in "123456789"]
+
+for i in groups:
+    keys.extend(
+        [
+            # mod1 + group number = switch to group
+            Key(
+                [mod],
+                i.name,
+                lazy.group[i.name].toscreen(),
+                desc="Switch to group {}".format(i.name),
+            ),
+            # mod1 + shift + group number = switch to & move focused window to group
+            Key(
+                [mod, "shift"],
+                i.name,
+                lazy.window.togroup(i.name, switch_group=True),
+                desc="Switch to & move focused window to group {}".format(i.name),
+            ),
+            # Or, use below if you prefer not to switch to that group.
+            # # mod1 + shift + group number = move focused window to group
+            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name),
+            #     desc="move focused window to group {}".format(i.name)),
+        ]
+    )
 ###############################################################################################
 ###############################################################################################
 ###                                                                                         ###
@@ -107,54 +128,18 @@ groups = [
 ###############################################################################################
 ###############################################################################################
 layouts = [
-    layout.Stack(
-        border_normal=selectedTheme["borderNormal"],
-        border_focus=selectedTheme["borderFocus"],
-        border_width=3,
-        margin=10,
-        #
-        num_stacks=2,
-    ),
-    layout.MonadTall(
-        border_normal=selectedTheme["borderNormal"],
-        border_focus=selectedTheme["borderFocus"],
-        border_width=3,
-        margin=10,
-        #
-    ),
-    layout.Columns(
-        border_normal=selectedTheme["borderNormal"], 
-        border_focus=selectedTheme["borderFocus"], 
-        border_width=3, 
-        margin=10,
-        #
-        border_normal_stack="#000000", 
-        border_focus_stack="#6699FF", 
-        border_on_single=2,
-        margin_on_single=10,
-    ),
-    layout.VerticalTile(
-        border_normal=selectedTheme["borderNormal"],
-        border_focus=selectedTheme["borderFocus"],
-        border_width=3, 
-        margin=10,
-        #
-        border_on_single=2,  
-        margin_on_single=10,
-    ),
-    layout.Max(
-        border_normal=selectedTheme["borderNormal"],
-        border_focus=selectedTheme["borderFocus"],
-        border_width=3,
-        margin=10,
-        #
-    ),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
+    layout.Max(),
+    # Try more layouts by unleashing below layouts.
+    # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
+    # layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
+    # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 ###############################################################################################
@@ -177,26 +162,29 @@ extension_defaults = widget_defaults.copy()
 ###                                                                                         ###
 ###############################################################################################
 ###############################################################################################
-imgList = os.listdir("/home/kitten/.config/qtile/Wallpapers/JPG")
-random_num = random.choice(imgList)
-path = "/home/kitten/.config/qtile/Wallpapers/JPG/" + random_num
 screens = [
-    # Main Laptop Screen
-    Screen(wallpaper=path, wallpaper_mode='fill', top=bar.Bar
-        (
+    Screen(
+        bottom=bar.Bar(
             [
-                widget.CurrentLayout(background="#000000", foreground="#FFFFFF", custom_icon_paths=["/home/kitten/.config/qtile/layout-icons/gruvbox-neutral_orange"]),
-                widget.GroupBox(highlight_method="line", active="#33CC33", borderwidth=2),
+                widget.CurrentLayout(),
+                widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.Chord(chords_colors={"launch": ("#ff0000", "#ffffff"),},name_transform=lambda name: name.upper(),),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#ff0000", "#ffffff"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+                widget.TextBox("default config", name="default"),
+                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                widget.Volume(fmt='Vol: {}'),
-                widget.NetGraph(),
-                widget.KhalCalendar(foreground="#9966FF"),
-                widget.Clock(foreground="7733ff", format="%Y-%m-%d %a %I:%M %p"),
-                widget.Battery(foreground="#5500FF", format="{percent:2.0%}", low_percentage=30.0, charge_char="***"),
-            ],  30,
+                # widget.StatusNotifier(),
+                widget.Systray(),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.QuickExit(),
+            ],
+            24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
@@ -204,40 +192,6 @@ screens = [
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
-    ),
-    # Left Dell Monitor HTML
-    Screen(wallpaper=path, wallpaper_mode='fill', top=bar.Bar
-        (
-            [
-                widget.CurrentLayout(background="#000000", foreground="#FFFFFF"),
-                widget.GroupBox(highlight_method="line", active="#33CC33", borderwidth=2),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(chords_colors={"launch": ("#ff0000", "#ffffff"),},name_transform=lambda name: name.upper(),),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.KhalCalendar(foreground="#9966FF"),
-                widget.Clock(foreground="7733ff", format="%Y-%m-%d %a %I:%M %p"),
-                widget.Battery(foreground="#5500FF", format="{percent:2.0%}", low_percentage=30.0, charge_char="***"),
-            ],  30,
-        ),
-    ),
-    # Right Dell Monitor C-Type<->HTML
-    Screen(wallpaper=path, wallpaper_mode='fill', top=bar.Bar
-        (
-            [
-                widget.CurrentLayout(background="#000000", foreground="#FFFFFF"),
-                widget.GroupBox(highlight_method="line", active="#33CC33", borderwidth=2),
-                widget.Prompt(),
-                widget.WindowName(),
-                widget.Chord(chords_colors={"launch": ("#ff0000", "#ffffff"),},name_transform=lambda name: name.upper(),),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
-                widget.KhalCalendar(foreground="#9966FF"),
-                widget.Clock(foreground="#7733FF", format="%a %I:%M %p"),
-                widget.Battery(foreground="#5500FF", format="{percent:2.0%}", low_percentage=30.0, charge_char="***"),
-            ],  30,
-        ),
     ),
 ]
 ###############################################################################################
@@ -274,8 +228,6 @@ cursor_warp = False
 ###############################################################################################
 ###############################################################################################
 floating_layout = layout.Floating(
-    border_focus="#FFFF00",
-    border_width=2,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
