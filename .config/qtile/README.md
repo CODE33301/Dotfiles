@@ -28,9 +28,9 @@ mkdir -p ~/.config/qtile/
 ## Errors
 ### Import Error: KhalCalendar
 ```
-sudo pacman -S python-dateutil
+sudo pacman -Syu python-dateutil
 ```
 ### Import Error: Bluetooth
 ```
-sudo pacman -S python-psutil
+sudo pacman -Syu python-dbus-next
 ```
