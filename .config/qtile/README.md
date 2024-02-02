@@ -30,15 +30,7 @@ mkdir -p ~/.config/qtile/
 ```
 sudo pacman -S python-dateutil
 ```
-
-
-
-## Autostart
-### Create autostart.sh File
+### Import Error: Bluetooth
 ```
-touch ~/.config/qtile/autostart.sh
-```
-### Executed
-```
-sudo chmod +x ~/.config/qtile/autostart.sh
+sudo pacman -S python-psutil
 ```
