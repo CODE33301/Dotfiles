@@ -27,3 +27,11 @@ mkdir -p ~/.config/qtile/
 ```
 sudo pacman -S python-dateutil
 ```
+
+
+
+## Autostart
+### Create autostart.sh File
+```
+touch ~/.config/qtile/autostart.sh
+```
