@@ -9,6 +9,9 @@ from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+import os
+import subprocess
+from libqtile import hook
 ###############################################################################################
 ###############################################################################################
 ###                                                                                         ###
@@ -128,18 +131,54 @@ for i in groups:
 ###############################################################################################
 ###############################################################################################
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
+    layout.Max(
+        border_normal="#3A015C",
+        border_focus="#11001C",
+        border_width=3,
+        margin=10,
+        #
+    ),
+    layout.Stack(
+        border_normal="#3A015C",
+        border_focus="#11001C",
+        border_width=3,
+        margin=10,
+        #
+        num_stacks=2,
+    ),
+    layout.MonadTall(
+        border_normal="#3A015C",
+        border_focus="#11001C",
+        border_width=3,
+        margin=10,
+        #
+    ),
+    layout.Columns(
+        border_normal="#3A015C", 
+        border_focus="#11001C", 
+        border_width=3, 
+        margin=10,
+        #
+        border_normal_stack="#000000", 
+        border_focus_stack="#6699FF", 
+        border_on_single=2,
+        margin_on_single=10,
+    ),
+    layout.VerticalTile(
+        border_normal="#3A015C",
+        border_focus="#11001C",
+        border_width=3, 
+        margin=10,
+        #
+        border_on_single=2,  
+        margin_on_single=10,
+    ),
     # layout.Bsp(),
     # layout.Matrix(),
-    # layout.MonadTall(),
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
     # layout.TreeTab(),
-    # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
 ###############################################################################################
@@ -176,8 +215,6 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
-                widget.TextBox("default config", name="default"),
-                widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
@@ -266,3 +303,14 @@ wl_input_rules = None
 ###############################################################################################
 ###############################################################################################
 wmname = "LG3D"
+###############################################################################################
+###############################################################################################
+###                                                                                         ###
+###                                           Autostart                                     ###
+###                                                                                         ###
+###############################################################################################
+###############################################################################################
+# Wallpaper
+print(os.popen("feh --bg-scale --randomize /home/$USER/.config/Wallpapers/JPG/*").read())
+
+# Can't Autorun Other Programs
