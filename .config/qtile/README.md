@@ -34,3 +34,11 @@ sudo pacman -Syu python-dateutil
 ```
 sudo pacman -Syu python-dbus-next
 ```
+### Import Error: Wlan
+```
+sudo pacman -Syu python-iwlib
+```
+### Import Error: PulseVolume
+```
+sudo yay -S python-pulsectl-asyncio
+```
