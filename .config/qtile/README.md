@@ -22,6 +22,9 @@ Create qtile folder and then download my config.py
 ```
 mkdir -p ~/.config/qtile/
 ```
+
+
+
 ## Errors
 ### Import Error: KhalCalendar
 ```
