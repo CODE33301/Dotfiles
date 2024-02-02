@@ -38,3 +38,7 @@ sudo pacman -S python-dateutil
 ```
 touch ~/.config/qtile/autostart.sh
 ```
+### Executed
+```
+sudo chmod +x ~/.config/qtile/autostart.sh
+```
