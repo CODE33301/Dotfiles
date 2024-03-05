@@ -87,7 +87,7 @@ client.background       #ffffff
 tiling_drag modifier titlebar
 
 ### start a terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec terminology
 
 ### kill focused window
 bindsym $mod+w kill
@@ -231,6 +231,12 @@ mode "resize" {
 
 bindsym $mod+Shift+r mode "resize"
 
+# Resize window with control
+bindsym $mod+Control+Right resize shrink width 10 px or 10 ppt
+#bindsym $mod+Control+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Control+Left resize grow width 10 px or 10 ppt
+#bindsym $mod+Control+Down resize grow height 10 px or 10 ppt
+
 #############################################################################################################
 #############################################################################################################
 ###                                                                                                       ###
@@ -255,4 +261,4 @@ bar {
 #### Run Picom
 exec picom -b &
 #### set Wallpaper
-exec feh --bg-scale /home/$USER/.config/Wallpapers/JPG/_DSC6639.jpg
+exec feh --bg-scale --randomize /home/$USER/.config/Wallpapers/JPG/*
