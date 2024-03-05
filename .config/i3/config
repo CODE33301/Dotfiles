@@ -259,6 +259,12 @@ bar {
 ###############################################################################################
 ###############################################################################################
 #### Run Picom
-exec picom -b &
+exec picom --config /home/$USER/.config/picom/picom.conf
 #### set Wallpaper
 exec feh --bg-scale --randomize /home/$USER/.config/Wallpapers/JPG/*
+#### Network Manager
+exec nm-applet
+### Blueman Applet
+exec blueman-applet
+### Caffaine
+exec caffeine
